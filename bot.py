@@ -36,19 +36,19 @@ def predict(image_url):
 ///////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////// 
  
-              if update.message.photo:
-                file_id = update.message.photo[-1].file_id
-                image_url = bot.getFile(file_id).file_path
+if update.message.photo:
+  file_id = update.message.photo[-1].file_id
+  image_url = bot.getFile(file_id).file_path
 
-                prediction = predict(image_url)
-               
-                if prediction < 0.001:
-                    answer = "Я думаю, что на фото кошка."
-                elif prediction > 0.999:
-                    answer = "Я думаю, что на фото собака."
-                else:
-                    answer = "Я не знаю, кто на фото."
+  prediction = predict(image_url)
+
+  if prediction < 0.001:
+      answer = "Я думаю, что на фото кошка."
+  elif prediction > 0.999:
+      answer = "Я думаю, что на фото собака."
+  else:
+      answer = "Я не знаю, кто на фото."
                   
-            else:
-                answer = "Нет фото"
-            update.message.reply_text(answer)
+else:
+    answer = "Нет фото"
+update.message.reply_text(answer)
